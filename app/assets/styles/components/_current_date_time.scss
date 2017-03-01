@@ -1,0 +1,26 @@
+.curreent-date-time {
+  height: 15rem;
+
+	.group {
+		background-color: $datetime-background;
+		color: $datetime-font-color;
+		padding-top: 2.3rem;
+	}
+
+  .date, .time {
+		font-family: $lato;
+		text-align: center;
+		text-shadow: 2px 2px 4px #53432c;
+    text-transform: capitalize;
+  }
+
+	.time {
+		font-size: 4.3rem;
+		font-weight: 900;
+	}
+
+	.date {
+		font-size: 3.5rem;
+		font-weight: 600;
+	}
+}

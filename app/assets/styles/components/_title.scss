@@ -1,0 +1,15 @@
+.title {
+	height: 15rem;
+
+	.group {
+		background-color: $title-background;
+	}
+
+	.logo {
+		background-image: url('/images/logo.png');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+		height: 12rem;
+	}
+}

@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Titillium+Web:200,200i,300,300i,400,400i,600,600i,700,700i,900');
+@import url('https://fonts.googleapis.com/css?family=Baloo');
+
+//Font & Text
+$roboto: 'Roboto', sans-serif;
+$hind: 'Hind', sans-serif;
+$lato: 'Lato', sans-serif;
+$titillium: 'Titillium Web', sans-serif;
+$baloo: 'Baloo', cursive;
+
+$light: 300;
+$regular: 400;
+$semibold: 600;
+
+//Color
+$white: #fff;
+$grey-white: #fbfbfb;
+$tune-color: #007aff;
+$black: black;
+$dark-blue: #001d4c;
+$wetsand: #707571;
+$lakeblue: #4b8492;
+$mossgreen: #83958e;
+$deep-lakeblue: #42687c;
+$cloudy-sky: #8096a6;
+$rock: #b9bdbe;
+$light-grey: #eee;
+$dark-grey: #222;
+
+$subtitle-color: $light-grey;
+
+$back-ground: #f7f4ed;
+$title-background: $grey-white;
+$datetime-background: $wetsand;
+$datetime-font-color: ghostwhite;
+$cover-background: #3b454c;
+$status-background: #3b454c;
+$reply-background: $wetsand;
+$satisfaction-background: $deep-lakeblue;
+$comments-background: $lakeblue;
+
+$small-only: 'only screen
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)';
+
+$small-up: 'only screen
+  and (max-device-width: 736px)
+  and (-webkit-min-device-pixel-ratio: 3)';
+
+$medium-only: 'only screen
+  and (max-device-width: 768px)
+  and (-webkit-min-device-pixel-ratio: 1)';
+
+$medium-up: 'only screen
+  and (max-device-width: 1024px)
+  and (-webkit-min-device-pixel-ratio: 1)';
+
+$large-only: 'only screen
+  and (max-device-width: 1600px)
+  and (-webkit-min-device-pixel-ratio: 1)';
+
+$large-up: 'only screen
+  and (min-device-width: 1601px)
+  and (-webkit-min-device-pixel-ratio: 1)';

@@ -1,0 +1,21 @@
+.chart {
+  padding: 0.7rem;
+
+  .highcharts-container {
+    height: 30.0rem !important;
+    padding: 0.8rem 0;
+  }
+
+  .highcharts-title {
+    fill: $tune-color !important;
+    font-family: $roboto;
+    font-size: 1.4rem !important;
+    font-weight: 600;
+    margin-top: 1.0rem;
+  }
+
+  .highcharts-axis-labels > text {
+    font-size: 0.9rem !important;
+    font-weight: 600;
+  }
+}
