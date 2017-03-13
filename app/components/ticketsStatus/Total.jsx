@@ -2,11 +2,20 @@ import React from 'react'
 import ReactHighcharts from 'react-highcharts'
 
 class Total extends React.Component {
+  createChart() {
+    if(this.props.totalStatus.new.ho) {
+      return <ReactHighcharts config={this.columnChart()} />
+    }
+    else {
+      return <h3 className='loading'>Loading ...</h3>
+    }
+  }
+
   render() {
     return (
       <div className='col-4 ticket-status'>
         <div className='chart'>
-          <ReactHighcharts config={this.columnChart()} />
+          {this.createChart()}
         </div>
       </div>
     )
@@ -51,13 +60,13 @@ class Total extends React.Component {
         {
           name: 'New Tickets',
           color: '#f37a21',
-          data: [3, 17.2]
+          data: [this.props.totalStatus.new.tmc, this.props.status.new.ho]
           ,
         },
         {
           name: 'Solved Tickets',
           color: '#0b9444',
-          data: [10, 34.4]
+          data: [this.props.totalStatus.solved.tmc, this.props.status.solved.ho]
         }
       ]
     }

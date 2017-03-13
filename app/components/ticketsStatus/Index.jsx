@@ -8,8 +8,8 @@ class Index extends React.Component {
       <div className='columns col-7 ticket-status'>
 				<div className='group'>
 					<h2 className='sub-title'>Tickets Staus Last 7 days</h2>
-					<Total />
-					<Daily />
+					<Total totalStatus={this.props.statusTotal} />
+					<Daily dailyStatus={this.props.statusDaily} />
 				</div>
       </div>
     )

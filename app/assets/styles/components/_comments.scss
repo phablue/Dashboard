@@ -2,4 +2,14 @@
   .group {
     background-color: $comments-background;
   }
+
+  .client-comment {
+    color: $white;
+    font-family: $hind;
+    font-size: 1.8rem;
+    font-weight: 600;
+    list-style: none;
+    padding: 7px 0;
+    text-transform: capitalize;
+  }
 }

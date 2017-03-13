@@ -2,11 +2,20 @@ import React from 'react'
 import ReactHighcharts from 'react-highcharts'
 
 class Ho extends React.Component {
+  createChart() {
+    if(this.props.satisfactionHO.offered) {
+      return <ReactHighcharts config={this.pieChart()} />
+    }
+    else {
+      return <h3 className='loading'>Loading ...</h3>
+    }
+  }
+
   render() {
     return (
       <div className='col-6 ho'>
         <div className='chart'>
-          <ReactHighcharts config={this.pieChart()} />
+          {this.createChart()}
         </div>
       </div>
     )
@@ -55,9 +64,9 @@ class Ho extends React.Component {
 				name: 'Satisfaction',
 				innerSize: '50%',
 				data: [
-					{ name: 'Offered', y: 20, color: '#8096a6' },
-					{ name: 'Googd', y: 30, color: '#028abe' },
-					{ name: 'Bad', y: 50, color: '#ce0000' }
+					{ name: 'Offered', y: this.props.satisfactionHO.offered, color: '#8096a6' },
+					{ name: 'Good', y: this.props.satisfactionHO.good, color: '#028abe' },
+					{ name: 'Bad', y: this.props.satisfactionHO.bad, color: '#ce0000' }
 				]
 			}]
     }

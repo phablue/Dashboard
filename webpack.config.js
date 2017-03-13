@@ -50,7 +50,7 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin({ filename: '/styles.css', allChunks: true })
+    new ExtractTextPlugin({ filename: '/styles.css', allChunks: true, publicPath: '/' })
   ]
 
 };

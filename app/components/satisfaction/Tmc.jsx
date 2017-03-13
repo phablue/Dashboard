@@ -3,11 +3,20 @@ import ReactHighcharts from 'react-highcharts'
 import moment from 'moment'
 
 class Tmc extends React.Component {
+  createChart() {
+    if(this.props.satisfactionTMC.offered) {
+      return <ReactHighcharts config={this.pieChart()} />
+    }
+    else {
+      return <h3 className='loading'>Loading ...</h3>
+    }
+  }
+
   render() {
     return (
       <div className='col-6 tmc'>
         <div className='chart'>
-          <ReactHighcharts config={this.pieChart()} />
+          {this.createChart()}
         </div>
       </div>
     )
@@ -52,9 +61,9 @@ class Tmc extends React.Component {
 				name: 'Satisfaction',
 				innerSize: '50%',
 				data: [
-					{ name: 'Offered', y: 20, color: '#8096a6' },
-					{ name: 'Googd', y: 30, color: '#028abe' },
-					{ name: 'Bad', y: 50, color: '#ce0000' }
+					{ name: 'Offered', y: this.props.satisfactionTMC.offered, color: '#8096a6' },
+					{ name: 'Good', y: this.props.satisfactionTMC.good, color: '#028abe' },
+					{ name: 'Bad', y: this.props.satisfactionTMC.bad, color: '#ce0000' }
 				]
 			}]
     }
