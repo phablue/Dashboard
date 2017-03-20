@@ -38,8 +38,6 @@ class Ho extends React.Component {
 			plotOptions: {
 				pie: {
 					dataLabels: {
-						enabled: true,
-						distance: -30,
 						formatter: function() {
 							if(this.y > 0) {
 								return `${this.key}<br>${this.y}%`

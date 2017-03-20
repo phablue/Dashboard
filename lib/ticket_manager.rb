@@ -161,7 +161,7 @@ class TicketManager
       return ( created_date > min_date && created_date < now_utc ) || ( updated_date > min_date && updated_date < now_utc )
     end
 
-    created_date >= min_date && created_date < now_utc
+    created_date > min_date && created_date < now_utc
   end
 
   def is_ho_tickets_in_last_7days(ticket)

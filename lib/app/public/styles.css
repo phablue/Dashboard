@@ -29,7 +29,7 @@ h6, .h6 {
   font-weight: 900;
   letter-spacing: 1px;
   line-height: 1.3;
-  padding: 0.3rem 0.7rem;
+  padding: 0 0.7rem;
   text-shadow: 2px 2px 4px #53432c; }
 
 .light {
@@ -170,14 +170,14 @@ body {
     background-color: #162030; }
 
 .ticket-status {
-  height: 29rem; }
+  height: 28.5rem; }
   .ticket-status .group {
     background-color: #283346; }
   .ticket-status .highcharts-container {
     height: 23rem !important; }
 
 .first-reply-time {
-  height: 27rem; }
+  height: 26.5rem; }
   .first-reply-time .group {
     background-color: #1f2e45; }
   .first-reply-time .highcharts-container {
@@ -186,7 +186,7 @@ body {
     font-family: "Lato", sans-serif; }
 
 .satisfaction {
-  height: 27rem; }
+  height: 26.5rem; }
   .satisfaction .group {
     background-color: #101823; }
   .satisfaction .highcharts-container {
@@ -195,7 +195,7 @@ body {
     font-family: "Lato", sans-serif; }
 
 .comments {
-  height: 13rem;
+  height: 12rem;
   overflow: hidden; }
   .comments .group {
     background-color: #162030; }
@@ -205,7 +205,7 @@ body {
     font-size: 1.8rem;
     font-weight: 600;
     list-style: none;
-    padding: 7px 0;
+    padding: 4px 0;
     text-transform: capitalize; }
 
 body {

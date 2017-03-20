@@ -14,7 +14,7 @@ class Daily extends React.Component {
 
   render() {
     return (
-      <div className='col-8 ticket-status'>
+      <div className='col-9 ticket-status'>
         <div className='chart'>
           {this.createChart()}
         </div>

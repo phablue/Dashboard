@@ -38,7 +38,7 @@ class Comments extends React.Component {
     return (
       <div className='columns col-12 comments'>
         <div className='group'>
-          <h2 className='sub-title'>Comments From Clients</h2>
+          <h2 className='sub-title'>Clients Comments</h2>
           <ul className='client-comments' ref='comments'>
             {this.commentList()}
           </ul>
