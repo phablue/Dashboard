@@ -1,5 +1,15 @@
 .first-reply-time {
+  height: 27rem;
+
   .group {
     background-color: $reply-background;
+  }
+
+  .highcharts-container {
+    height: 21.0rem !important;
+  }
+
+  .highcharts-data-label > text {
+    font-family: $lato;
   }
 }

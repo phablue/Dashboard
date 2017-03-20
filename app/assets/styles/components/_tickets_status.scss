@@ -1,5 +1,11 @@
 .ticket-status {
+  height: 29rem;
+
   .group {
     background-color: $status-background;
+  }
+
+  .highcharts-container {
+    height: 23rem !important;
   }
 }

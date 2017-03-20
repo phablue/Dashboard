@@ -43,11 +43,24 @@ class Total extends React.Component {
         }
 			},
 
+			legend: {
+				align: 'center',
+				verticalAlign: 'top',
+				floating: true,
+				backgroundColor: 'white',
+				y: 20,
+				shadow: false,
+				itemStyle: { "fontSize": "1.3rem", "fontWeight": "bold" }
+			},
+
       plotOptions: {
         column: {
           dataLabels: {
             enabled: true,
-            inside: true
+            inside: true,
+            style: {
+              fontSize: '1.1rem'
+            }
           }
         }
       },
@@ -58,15 +71,15 @@ class Total extends React.Component {
 
 			series: [
         {
-          name: 'New Tickets',
-          color: '#f37a21',
-          data: [this.props.totalStatus.new.tmc, this.props.status.new.ho]
+          name: 'New',
+          color: '#52b8de',
+          data: [this.props.totalStatus.new.tmc, this.props.totalStatus.new.ho]
           ,
         },
         {
-          name: 'Solved Tickets',
-          color: '#0b9444',
-          data: [this.props.totalStatus.solved.tmc, this.props.status.solved.ho]
+          name: 'Solved',
+          color: '#8dbd50',
+          data: [this.props.totalStatus.solved.tmc, this.props.totalStatus.solved.ho]
         }
       ]
     }

@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactHighcharts from 'react-highcharts'
 
-class Ho extends React.Component {
+class Tmc extends React.Component {
   createChart() {
-    if(this.props.satisfactionHO.offered) {
+    if(this.props.tmcFirstReplyTime['0-1']) {
       return <ReactHighcharts config={this.pieChart()} />
     }
     else {
@@ -13,7 +13,7 @@ class Ho extends React.Component {
 
   render() {
     return (
-      <div className='col-6 ho'>
+      <div className='col-6 tmc'>
         <div className='chart'>
           {this.createChart()}
         </div>
@@ -30,30 +30,26 @@ class Ho extends React.Component {
       },
 
       title: {
-        text: 'HO',
+        text: 'TMC',
         align: 'center',
-        verticalAlign: 'middle',
-        y: 70
+        verticalAlign: 'middle'
       },
 
       plotOptions: {
         pie: {
           dataLabels: {
             enabled: true,
+            distance: -30,
             formatter: function() {
               if(this.y > 0) {
                 return `${this.key}<br>${this.y}%`
               }
             },
-            distance: -30,
             style: {
 							color: 'black',
               fontSize: '1.1rem'
             }
-          },
-          startAngle: -90,
-          endAngle: 90,
-          center: ['50%', '75%']
+          }
         }
       },
 
@@ -63,16 +59,32 @@ class Ho extends React.Component {
 
 			series: [{
 				type: 'pie',
-				name: 'Satisfaction',
-				innerSize: '50%',
-				data: [
-					{ name: 'Offered', y: this.props.satisfactionHO.offered, color: '#ecae4f' },
-					{ name: 'Good', y: this.props.satisfactionHO.good, color: '#23b66f' },
-					{ name: 'Bad', y: this.props.satisfactionHO.bad, color: '#ef193b' }
-				]
-			}]
+        innerSize: '100',
+        data: [
+          {
+            name: 'Over 24 hrs',
+            y: this.props.tmcFirstReplyTime['24+'],
+            color: '#e42b75'
+          },
+          {
+            name: '8-24 hrs',
+            y: this.props.tmcFirstReplyTime['8-24'],
+            color: '#fa5833'
+          },
+          {
+            name: '1-8 hrs',
+            y: this.props.tmcFirstReplyTime['1-8'],
+            color: '#ecae4f'
+          },
+          {
+            name: '0-1 hrs',
+            y: this.props.tmcFirstReplyTime['0-1'],
+            color: '#23B661'
+          }
+        ]
+      }]
     }
   }
 }
 
-module.exports = Ho
+module.exports = Tmc

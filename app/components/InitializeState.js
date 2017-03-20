@@ -30,13 +30,16 @@ const InitializeState =  {
   satisfaction_total: {
     ho:
     {
+      total: null,
       bad: null,
       good: null ,
       offered: null
     },
 
     tmc:
-    { bad: null,
+    {
+      total: null,
+      bad: null,
       good: null,
       offered: null
     }

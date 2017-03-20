@@ -1,14 +1,15 @@
 .satisfaction {
+  height: 27rem;
+
   .group {
     background-color: $satisfaction-background;
   }
 
   .highcharts-container {
-    height: 25.0rem !important;
+    height: 21.0rem !important;
   }
 
   .highcharts-data-label > text {
-    fill: $white !important;
-    font-weight: 600;
+    font-family: $lato;
   }
 }

@@ -119,23 +119,24 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 0.2rem; }
 
+.loading {
+  color: #fff; }
+
 .chart {
   padding: 0.7rem; }
-  .chart .highcharts-container {
-    height: 30.0rem !important;
-    padding: 0.8rem 0; }
   .chart .highcharts-title {
     fill: #007aff !important;
-    font-family: "Roboto", sans-serif;
-    font-size: 1.4rem !important;
+    font-family: "Hind", sans-serif;
+    font-size: 1.9rem !important;
     font-weight: 600;
-    margin-top: 1.0rem; }
+    margin-top: 1.0rem;
+    text-shadow: 1px 1px 1px #1f2e45; }
   .chart .highcharts-axis-labels > text {
-    font-size: 0.9rem !important;
+    font-size: 0.8rem !important;
     font-weight: 600; }
 
 .title {
-  height: 15rem; }
+  height: 13rem; }
   .title .group {
     background-color: #fbfbfb; }
   .title .logo {
@@ -143,13 +144,12 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    height: 12rem;
-    margin-top: 20px; }
+    height: 12rem; }
 
 .curreent-date-time {
-  height: 15rem; }
+  height: 13rem; }
   .curreent-date-time .group {
-    background-color: #00477d;
+    background-color: #101823;
     color: ghostwhite;
     padding-top: 2.3rem; }
   .curreent-date-time .date, .curreent-date-time .time {
@@ -165,37 +165,48 @@ body {
     font-weight: 600; }
 
 .weekend-holiday-cover {
-  height: 15rem; }
+  height: 13rem; }
   .weekend-holiday-cover .group {
+    background-color: #162030; }
+
+.ticket-status {
+  height: 29rem; }
+  .ticket-status .group {
     background-color: #283346; }
+  .ticket-status .highcharts-container {
+    height: 23rem !important; }
 
-.ticket-status .group {
-  background-color: #283346; }
+.first-reply-time {
+  height: 27rem; }
+  .first-reply-time .group {
+    background-color: #1f2e45; }
+  .first-reply-time .highcharts-container {
+    height: 21.0rem !important; }
+  .first-reply-time .highcharts-data-label > text {
+    font-family: "Lato", sans-serif; }
 
-.first-reply-time .group {
-  background-color: #00477d; }
+.satisfaction {
+  height: 27rem; }
+  .satisfaction .group {
+    background-color: #101823; }
+  .satisfaction .highcharts-container {
+    height: 21.0rem !important; }
+  .satisfaction .highcharts-data-label > text {
+    font-family: "Lato", sans-serif; }
 
-.satisfaction .group {
-  background-color: #42687c; }
-
-.satisfaction .highcharts-container {
-  height: 25.0rem !important; }
-
-.satisfaction .highcharts-data-label > text {
-  fill: #fff !important;
-  font-weight: 600; }
-
-.comments .group {
-  background-color: #4b8492; }
-
-.comments .client-comment {
-  color: #fff;
-  font-family: "Hind", sans-serif;
-  font-size: 1.8rem;
-  font-weight: 600;
-  list-style: none;
-  padding: 7px 0;
-  text-transform: capitalize; }
+.comments {
+  height: 13rem;
+  overflow: hidden; }
+  .comments .group {
+    background-color: #162030; }
+  .comments .client-comment {
+    color: #fff;
+    font-family: "Hind", sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    list-style: none;
+    padding: 7px 0;
+    text-transform: capitalize; }
 
 body {
   font-family: "Roboto", sans-serif; }

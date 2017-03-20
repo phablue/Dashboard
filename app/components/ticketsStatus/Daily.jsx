@@ -2,7 +2,6 @@ import _ from 'lodash'
 import React from 'react'
 import ReactHighcharts from 'react-highcharts'
 import moment from 'moment'
-
 class Daily extends React.Component {
   createChart() {
     if(this.props.dailyStatus.new.ho) {
@@ -24,15 +23,17 @@ class Daily extends React.Component {
   }
 
   mixChart() {
-    console.log(this.getDateKeys());
     return {
+      chart: {
+        type: 'column'
+      },
+
       title: {
         text: 'Daily Status'
       },
 
 			xAxis: {
-				categories: this.getDateKeys(),
-        crosshair: true
+				categories: this.getDateKeys()
 			},
 
       yAxis: {
@@ -40,53 +41,56 @@ class Daily extends React.Component {
         title: null
       },
 
+			legend: {
+				align: 'center',
+				verticalAlign: 'top',
+				floating: true,
+				backgroundColor: 'white',
+				y: 20,
+				shadow: false,
+				itemStyle: { "fontSize": "1.3rem", "fontWeight": "bold" }
+			},
+
+			plotOptions: {
+				column: {
+					grouping: false,
+					shadow: false,
+					borderWidth: 0
+				}
+			},
+
 			credits: {
 				enabled: false
 			},
 
 			series: [
         {
-          name: 'New Tickets(HO)',
-          type: 'spline',
-          color: '#030162',
+          name: 'HO New',
+          color: '#429a86',
           data: _.values(this.props.dailyStatus.new.ho),
-          dataLabels: {
-            enabled: true,
-            crop: false,
-            overflow: 'none'
-          }
-
+					pointPadding: 0.3,
+					pointPlacement: -0.2
         },
         {
-          name: 'New Tickets(TMC)',
-          type: 'spline',
-          color: '#0b9444',
-          data: _.values(this.props.dailyStatus.new.tmc),
-          dataLabels: {
-            enabled: true,
-            crop: false,
-            overflow: 'none'
-          }
-        },
-        {
-          name: 'Solved Tickets(HO)',
-          type: 'column',
-          color: '#6facd8',
+          name: 'HO Solved',
+          color: '#d3ffba',
           data: _.values(this.props.dailyStatus.solved.ho),
-          dataLabels: {
-            enabled: true,
-            inside: true
-          }
+					pointPadding: 0.4,
+					pointPlacement: -0.2
         },
         {
-          name: 'Solved Tickets(TMC)',
-          type: 'column',
-          color: '#b5dfc7',
+          name: 'TMC New',
+          color: '#3c5b88',
+          data: _.values(this.props.dailyStatus.new.tmc),
+					pointPadding: 0.3,
+					pointPlacement: 0.2
+        },
+        {
+          name: 'TMC Solved',
+          color: '#cceae8',
           data: _.values(this.props.dailyStatus.solved.tmc),
-          dataLabels: {
-            enabled: true,
-            inside: true
-          }
+					pointPadding: 0.4,
+					pointPlacement: 0.2
         }
       ]
     }
@@ -94,7 +98,9 @@ class Daily extends React.Component {
 
   getDateKeys() {
     var keys = []
-    _.keys(this.props.dailyStatus.new.tmc)
+    _.forEach(this.props.dailyStatus.new.tmc, (value, key) => {
+      keys.push(moment(key).format('MMM-DD'))
+    })
 
     return keys;
   }

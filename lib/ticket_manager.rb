@@ -14,8 +14,8 @@ class TicketManager
         'solved' => { 'ho' => {} , 'tmc' => {} }
       },
       'satisfaction_total' => {
-        'ho' => { 'bad' => 0, 'good' => 0 , 'offered' => 0 },
-        'tmc' => { 'bad' => 0, 'good' => 0 , 'offered' => 0 },
+        'ho' => { 'total' => 0, 'bad' => 0, 'good' => 0 , 'offered' => 0 },
+        'tmc' => { 'total' => 0, 'bad' => 0, 'good' => 0 , 'offered' => 0 },
       },
       'first_reply_status' => {
         'ho' => { '0-1' => 0, '1-8' => 0 , '8-24' => 0, '24+' => 0 },
@@ -28,9 +28,9 @@ class TicketManager
   end
 
   def get_tickets
-    minimum_date = Date.parse(Time.now.to_s).prev_month.strftime("%Y-%m-01")
+    minimum_date = (Date.parse(Time.now.to_s) - 7).strftime("%Y-%m-%d")
 
-    tickets = @client.search(:query => "created>=#{minimum_date} type:ticket group:Support*")
+    tickets = @client.search(:query => "updated>=#{minimum_date} type:ticket group:Support*")
 
     tickets.all do |ticket|
       if has_good_comment_on_previous_month(ticket)
@@ -41,40 +41,80 @@ class TicketManager
         generate(ticket, 'tmc')
       end
     end
-
+    sort_daily_status
+    calculate_ratio
     @support_tickets
+  end
+
+  def calculate_ratio
+    parent_keys = ['first_reply_status', 'satisfaction_total']
+    groups = ['tmc', 'ho']
+
+    parent_keys.each do | parent_key |
+      groups.each do |group|
+        if parent_key == 'satisfaction_total'
+          group_total =  @support_tickets['satisfaction_total'][group]['total']
+          calculate_percentage(parent_key, group, group_total)
+        else
+          group_total = @support_tickets['status_total']['new'][group]
+          calculate_percentage(parent_key, group, group_total)
+        end
+      end
+    end
+  end
+
+  def calculate_percentage(parent_key, group, group_total)
+
+    @support_tickets[parent_key][group].each do |key, value|
+      @support_tickets[parent_key][group][key] = group_total > 0 ? (value / group_total.to_f * 100).round(2) : 0
+    end
+  end
+
+  def sort_daily_status
+    @support_tickets['status_daily']['new']['tmc'] = @support_tickets['status_daily']['new']['tmc'].sort.to_h
+    @support_tickets['status_daily']['new']['ho'] = @support_tickets['status_daily']['new']['ho'].sort.to_h
+    @support_tickets['status_daily']['solved']['tmc'] = @support_tickets['status_daily']['solved']['tmc'].sort.to_h
+    @support_tickets['status_daily']['solved']['ho'] = @support_tickets['status_daily']['solved']['ho'].sort.to_h
   end
 
   def generate(ticket, group)
     @support_tickets[group] << ticket
 
-    @support_tickets['status_total']['new'][group] += 1
-    categorize_created_date(ticket.created_at, 'new', group)
-
     ticket_first_reply = ticket.metrics.reply_time_in_minutes
-
     @support_tickets[group].last['reply_time_in_minutes'] = ticket_first_reply
 
-    unless ticket_first_reply.business == nil
-      categorize_first_reply(ticket_first_reply.business, group)
-    end
+		if is_solved(ticket)
+			@support_tickets['status_total']['solved'][group] += 1
+			categorize_date(ticket.updated_at, 'solved', group)
+			categorize_satisfaction(ticket.satisfaction_rating.score, group)
+		end
 
-    if is_solved(ticket)
-      @support_tickets['status_total']['solved'][group] += 1
-      categorize_created_date(ticket.created_at, 'solved', group)
-      categorize_satisfaction(ticket.satisfaction_rating.score, group)
+    if is_new(ticket)
+      @support_tickets['status_total']['new'][group] += 1
+
+      unless ticket_first_reply.business == nil
+        categorize_first_reply(ticket_first_reply.business, group)
+      end
+
+      categorize_date(ticket.created_at, 'new', group)
     end
   end
 
-  def categorize_created_date(ticket_created_time, type, group)
-    key = ticket_created_time.getlocal.strftime("%Y-%m-%d")
+  def categorize_date(date, type, group)
+    key = date.getlocal.strftime("%Y-%m-%d")
 
     if (@support_tickets['status_daily'][type][group][key])
       @support_tickets['status_daily'][type][group][key] += 1
     else
+			create_date_key(group, key)
       @support_tickets['status_daily'][type][group][key] = 1
     end
   end
+
+	def create_date_key(group, key)
+    @support_tickets['status_daily']['new'][group][key] = 0
+    @support_tickets['status_daily']['solved'][group][key] = 0
+	end
 
   def categorize_first_reply(ticket_first_reply_min, group)
     first_reply_hour = ticket_first_reply_min / 60
@@ -92,10 +132,13 @@ class TicketManager
 
   def categorize_satisfaction(ticket_satisfaction, group)
     if ticket_satisfaction == 'offered'
+      @support_tickets['satisfaction_total'][group]['total'] += 1
       @support_tickets['satisfaction_total'][group]['offered'] += 1
     elsif ticket_satisfaction == 'good'
+      @support_tickets['satisfaction_total'][group]['total'] += 1
       @support_tickets['satisfaction_total'][group]['good'] += 1
     elsif ticket_satisfaction == 'bad'
+      @support_tickets['satisfaction_total'][group]['total'] += 1
       @support_tickets['satisfaction_total'][group]['bad'] += 1
     end
   end
@@ -104,22 +147,31 @@ class TicketManager
     ticket.status == 'solved' || ticket.status == 'closed'
   end
 
-  def is_in_last_7days(created_time)
+	def is_new(ticket)
+    is_in_last_7days(ticket.created_at, false)
+	end
+
+  def is_in_last_7days(created_time, updated_time)
     now_utc = Date.parse(Time.now.utc.to_s)
     min_date = now_utc - 7
     created_date = Date.parse(created_time.to_s)
 
-    created_date >= min_date
+    if updated_time
+      updated_date = Date.parse(updated_time.to_s)
+      return ( created_date > min_date && created_date < now_utc ) || ( updated_date > min_date && updated_date < now_utc )
+    end
+
+    created_date >= min_date && created_date < now_utc
   end
 
   def is_ho_tickets_in_last_7days(ticket)
     #"id"=>25906657, "name"=>"Support - HO"
-    ticket.group_id == 25906657 && is_in_last_7days(ticket.created_at)
+    ticket.group_id == 25906657 && is_in_last_7days(ticket.created_at, ticket.updated_at)
   end
 
   def is_tmc_tickets_in_last_7days(ticket)
     #"id"=>25931578, "name"=>"Support - TMC"
-    ticket.group_id == 25931578 && is_in_last_7days(ticket.created_at)
+    ticket.group_id == 25931578 && is_in_last_7days(ticket.created_at, ticket.updated_at)
   end
 
   def has_good_comment_on_previous_month(ticket)

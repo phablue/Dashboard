@@ -39,16 +39,22 @@ class Tmc extends React.Component {
 
       plotOptions: {
         pie: {
-            dataLabels: {
-                enabled: true,
-								formatter: function() {
-                  return `${this.key}<br>${this.y}%`
-								},
-                distance: -50
+          dataLabels: {
+            enabled: true,
+            formatter: function() {
+              if(this.y > 0) {
+                return `${this.key}<br>${this.y}%`
+              }
             },
-            startAngle: -90,
-            endAngle: 90,
-            center: ['50%', '75%']
+            distance: -30,
+            style: {
+							color: 'black',
+              fontSize: '1.1rem'
+            }
+          },
+          startAngle: -90,
+          endAngle: 90,
+          center: ['50%', '75%']
         }
       },
 
@@ -61,9 +67,9 @@ class Tmc extends React.Component {
 				name: 'Satisfaction',
 				innerSize: '50%',
 				data: [
-					{ name: 'Offered', y: this.props.satisfactionTMC.offered, color: '#8096a6' },
-					{ name: 'Good', y: this.props.satisfactionTMC.good, color: '#028abe' },
-					{ name: 'Bad', y: this.props.satisfactionTMC.bad, color: '#ce0000' }
+					{ name: 'Offered', y: this.props.satisfactionTMC.offered, color: '#ecae4f' },
+					{ name: 'Good', y: this.props.satisfactionTMC.good, color: '#23b66f' },
+					{ name: 'Bad', y: this.props.satisfactionTMC.bad, color: '#ef193b' }
 				]
 			}]
     }
