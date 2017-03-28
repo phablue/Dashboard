@@ -18,8 +18,8 @@ class TicketManager
         'tmc' => { 'total' => 0, 'bad' => 0, 'good' => 0 , 'offered' => 0 },
       },
       'first_reply_status' => {
-        'ho' => { '0-1' => 0, '1-8' => 0 , '8-24' => 0, '24+' => 0 },
-        'tmc' => { '0-1' => 0, '1-8' => 0 , '8-24' => 0, '24+' => 0 },
+        'ho' => { 'total' => 0, '0-1' => 0, '1-8' => 0 , '8-24' => 0, '24+' => 0 },
+        'tmc' => { 'total' => 0, '0-1' => 0, '1-8' => 0 , '8-24' => 0, '24+' => 0 },
       },
       'ho' => [],
       'tmc' => [],
@@ -33,7 +33,7 @@ class TicketManager
     tickets = @client.search(:query => "updated>=#{minimum_date} type:ticket group:Support*")
 
     tickets.all do |ticket|
-      if has_good_comment_on_previous_month(ticket)
+      if is_good_comment(ticket)
         @support_tickets['comments'] << ticket.satisfaction_rating.comment
       elsif is_ho_tickets_in_last_7days(ticket)
         generate(ticket, 'ho')
@@ -53,10 +53,10 @@ class TicketManager
     parent_keys.each do | parent_key |
       groups.each do |group|
         if parent_key == 'satisfaction_total'
-          group_total =  @support_tickets['satisfaction_total'][group]['total']
+          group_total =  @support_tickets[parent_key][group]['total']
           calculate_percentage(parent_key, group, group_total)
         else
-          group_total = @support_tickets['status_total']['new'][group]
+          group_total = @support_tickets[parent_key][group]['total']
           calculate_percentage(parent_key, group, group_total)
         end
       end
@@ -118,6 +118,7 @@ class TicketManager
 
   def categorize_first_reply(ticket_first_reply_min, group)
     first_reply_hour = ticket_first_reply_min / 60
+    @support_tickets['first_reply_status'][group]['total'] += 1
 
     if first_reply_hour < 1
       @support_tickets['first_reply_status'][group]['0-1'] += 1
@@ -144,7 +145,11 @@ class TicketManager
   end
 
   def is_solved(ticket)
-    ticket.status == 'solved' || ticket.status == 'closed'
+    now = Date.parse(Time.now.to_s)
+    min_date = now - 7
+    updated_date = Date.parse(ticket.updated_at.getlocal.to_s)
+
+    (ticket.status == 'solved' || ticket.status == 'closed')  && (updated_date >= min_date && updated_date < now)
   end
 
 	def is_new(ticket)
@@ -152,16 +157,16 @@ class TicketManager
 	end
 
   def is_in_last_7days(created_time, updated_time)
-    now_utc = Date.parse(Time.now.utc.to_s)
-    min_date = now_utc - 7
-    created_date = Date.parse(created_time.to_s)
+    now = Date.parse(Time.now.to_s)
+    min_date = now - 7
+    created_date = Date.parse(created_time.getlocal.to_s)
 
     if updated_time
-      updated_date = Date.parse(updated_time.to_s)
-      return ( created_date > min_date && created_date < now_utc ) || ( updated_date > min_date && updated_date < now_utc )
+      updated_date = Date.parse(updated_time.getlocal.to_s)
+      return created_date < now || ( updated_date >= min_date && updated_date < now )
     end
 
-    created_date > min_date && created_date < now_utc
+    created_date >= min_date && created_date < now
   end
 
   def is_ho_tickets_in_last_7days(ticket)
@@ -174,15 +179,8 @@ class TicketManager
     ticket.group_id == 25931578 && is_in_last_7days(ticket.created_at, ticket.updated_at)
   end
 
-  def has_good_comment_on_previous_month(ticket)
-    is_tune_support_tickets(ticket.group_id) && is_previous_month(ticket.created_at) && has_good_comment(ticket.satisfaction_rating)
-  end
-
-  def is_previous_month(created_time)
-    previous_month = Date.parse(Time.now.to_s).prev_month.month
-    created_month = Date.parse(created_time.getlocal.to_s).month
-
-    created_month == previous_month
+  def is_good_comment(ticket)
+    is_tune_support_tickets(ticket.group_id) && has_good_comment(ticket.satisfaction_rating)
   end
 
   def is_tune_support_tickets(ticket_group_id)

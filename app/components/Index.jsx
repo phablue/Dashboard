@@ -27,27 +27,107 @@ class Index extends React.Component {
       })
       .then((jsonData) => {
         this.setState(jsonData)
+				this.setState({ currentStep: 1 })
+				this.displayPage()
       })
       .catch((err) => {
         console.log('parsing failed', err)
       })
   }
 
-  render() {
+	displayPage() {
+    setInterval(this.changeCurrentStep.bind(this), 15000);
+	}
+
+	changeCurrentStep() {
+		if (this.state.currentStep < 4 ) {
+			var nextStep = this.state.currentStep + 1
+			this.setState({ currentStep: nextStep })
+		}
+		else {
+			this.setState({ currentStep: 1 })
+		}
+	}
+
+	showPage() {
+		console.log(this.refs);
+		switch (this.state.currentStep) {
+			case 1:
+				return this.showAll()
+				break
+			case 2:
+				return this.showStatus()
+				break
+			case 3:
+				return this.showReplyAndSatisFaction()
+				break
+			case 4:
+				return this.showComments()
+				break
+			case 0:
+				return this.showLoader()
+		}
+	}
+
+	showLoader() {
+		return (
+			<div id="loader" ref='pageLoader'></div>
+			//<div id="loader-header" ref="pageLoaderheader"> Loading </div>
+		)
+	}
+
+	showAll() {
     return (
       <section className='main-contaniner'>
         <div className='row'>
           <TicketsStatus statusTotal={this.state.status_total} statusDaily={this.state.status_daily} />
         </div>
+
         <div className='row'>
           <FirstReplyTime allFirstReplyTime={this.state.first_reply_status} />
           <Satisfaction totalSatisfaction={this.state.satisfaction_total} />
         </div>
+
         <div className='row'>
           <Comments comments={this.state.comments} />
         </div>
       </section>
     )
+	}
+
+	showStatus() {
+    return (
+      <section className='main-contaniner'>
+        <div className='row only'>
+          <TicketsStatus statusTotal={this.state.status_total} statusDaily={this.state.status_daily} />
+        </div>
+      </section>
+    )
+	}
+
+	showReplyAndSatisFaction() {
+    return (
+      <section className='main-contaniner'>
+        <div className='row only'>
+          <FirstReplyTime allFirstReplyTime={this.state.first_reply_status} />
+          <Satisfaction totalSatisfaction={this.state.satisfaction_total} />
+        </div>
+      </section>
+    )
+	}
+
+	showComments() {
+    return (
+      <section className='main-contaniner'>
+        <div className='row only'>
+          <Comments comments={this.state.comments} />
+        </div>
+      </section>
+    )
+	}
+
+  render() {
+		return this.showPage()
   }
 }
 

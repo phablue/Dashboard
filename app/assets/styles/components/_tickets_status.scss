@@ -9,3 +9,31 @@
     height: 23rem !important;
   }
 }
+
+.only > .ticket-status{
+  height: 67rem;
+
+  .sub-title {
+    font-size: 3.5rem;
+  }
+
+  .col-3, .col-9 {
+    display: block;
+    height: 29rem;
+    padding-bottom: 0.2rem;
+    width: 100%;
+  }
+
+  .highcharts-container {
+    height: 28.5rem !important;
+  }
+
+  .highcharts-title {
+    font-size: 2rem !important;
+  }
+
+  .highcharts-axis-labels > text {
+    font-size: 1.5rem !important;
+    font-weight: 600;
+  }
+}

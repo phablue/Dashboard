@@ -122,6 +122,68 @@ body {
 .loading {
   color: #fff; }
 
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite; }
+
+#loader-header {
+  color: #007aff;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 49%; }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg); } }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s; }
+
+@-webkit-keyframes animatebottom {
+  from {
+    bottom: -100px;
+    opacity: 0; }
+  to {
+    bottom: 0px;
+    opacity: 1; } }
+
+@keyframes animatebottom {
+  from {
+    bottom: -100px;
+    opacity: 0; }
+  to {
+    bottom: 0;
+    opacity: 1; } }
+
 .chart {
   padding: 0.7rem; }
   .chart .highcharts-title {
@@ -146,21 +208,21 @@ body {
     background-size: contain;
     height: 12rem; }
 
-.curreent-date-time {
+row > .curreent-date-time {
   height: 13rem; }
-  .curreent-date-time .group {
+  row > .curreent-date-time .group {
     background-color: #101823;
     color: ghostwhite;
     padding-top: 2.3rem; }
-  .curreent-date-time .date, .curreent-date-time .time {
+  row > .curreent-date-time .date, row > .curreent-date-time .time {
     font-family: "Lato", sans-serif;
     text-align: center;
     text-shadow: 2px 2px 4px #53432c;
     text-transform: capitalize; }
-  .curreent-date-time .time {
+  row > .curreent-date-time .time {
     font-size: 4.3rem;
     font-weight: 900; }
-  .curreent-date-time .date {
+  row > .curreent-date-time .date {
     font-size: 3.5rem;
     font-weight: 600; }
 
@@ -176,6 +238,23 @@ body {
   .ticket-status .highcharts-container {
     height: 23rem !important; }
 
+.only > .ticket-status {
+  height: 67rem; }
+  .only > .ticket-status .sub-title {
+    font-size: 3.5rem; }
+  .only > .ticket-status .col-3, .only > .ticket-status .col-9 {
+    display: block;
+    height: 29rem;
+    padding-bottom: 0.2rem;
+    width: 100%; }
+  .only > .ticket-status .highcharts-container {
+    height: 28.5rem !important; }
+  .only > .ticket-status .highcharts-title {
+    font-size: 2rem !important; }
+  .only > .ticket-status .highcharts-axis-labels > text {
+    font-size: 1.5rem !important;
+    font-weight: 600; }
+
 .first-reply-time {
   height: 26.5rem; }
   .first-reply-time .group {
@@ -184,6 +263,21 @@ body {
     height: 21.0rem !important; }
   .first-reply-time .highcharts-data-label > text {
     font-family: "Lato", sans-serif; }
+
+.only > .first-reply-time {
+  height: 67rem; }
+  .only > .first-reply-time .sub-title {
+    font-size: 3.5rem; }
+  .only > .first-reply-time .col-6 {
+    display: block;
+    height: 30rem;
+    padding-bottom: 0.3rem;
+    width: 100%; }
+  .only > .first-reply-time .highcharts-container {
+    height: 30rem !important; }
+  .only > .first-reply-time .highcharts-axis-labels > text {
+    font-size: 1.5rem !important;
+    font-weight: 600; }
 
 .satisfaction {
   height: 26.5rem; }
@@ -194,19 +288,41 @@ body {
   .satisfaction .highcharts-data-label > text {
     font-family: "Lato", sans-serif; }
 
+.only > .satisfaction {
+  height: 67rem; }
+  .only > .satisfaction .sub-title {
+    font-size: 3.5rem; }
+  .only > .satisfaction .col-6 {
+    display: block;
+    height: 30rem;
+    padding-bottom: 0.3rem;
+    width: 100%; }
+  .only > .satisfaction .highcharts-container {
+    height: 30rem !important; }
+  .only > .satisfaction .highcharts-axis-labels > text {
+    font-size: 1.5rem !important;
+    font-weight: 600; }
+
 .comments {
   height: 12rem;
   overflow: hidden; }
   .comments .group {
     background-color: #162030; }
   .comments .client-comment {
-    color: #fff;
+    color: ghostwhite;
+    text-shadow: 2px 2px 2px #007aff;
     font-family: "Hind", sans-serif;
     font-size: 1.8rem;
     font-weight: 600;
     list-style: none;
-    padding: 4px 0;
     text-transform: capitalize; }
+
+.only > .comments {
+  height: 67rem; }
+  .only > .comments .sub-title {
+    font-size: 3.5rem; }
+  .only > .comments .client-comment {
+    font-size: 2.5rem; }
 
 body {
   font-family: "Roboto", sans-serif; }

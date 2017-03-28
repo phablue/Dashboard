@@ -24,7 +24,14 @@ class Total extends React.Component {
   columnChart() {
     return {
       chart: {
-        type: 'column'
+        type: 'column',
+        options3d: {
+					enabled: true,
+					alpha: 0,
+					beta: 0,
+					depth: 25,
+					viewDistance: 25
+        }
       },
 
       title: {
@@ -55,6 +62,7 @@ class Total extends React.Component {
 
       plotOptions: {
         column: {
+					depth: 25,
           dataLabels: {
             enabled: true,
             inside: true,

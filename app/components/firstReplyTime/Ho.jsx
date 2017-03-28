@@ -24,6 +24,10 @@ class Ho extends React.Component {
   pieChart() {
 		return {
 			chart: {
+        options3d: {
+          enabled: true,
+          alpha: 30
+        },
 				plotBackgroundColor: null,
 				plotBorderWidth: null,
 				plotShadow: false
@@ -32,7 +36,10 @@ class Ho extends React.Component {
 			title: {
 				text: 'HO',
 				align: 'center',
-				verticalAlign: 'middle'
+				verticalAlign: 'middle',
+        style: {
+          fontSize: '2rem'
+        }
 			},
 
 			plotOptions: {
@@ -47,7 +54,9 @@ class Ho extends React.Component {
 							color: 'black',
 							fontSize: '1.1rem'
 						}
-					}
+					},
+          innerSize: '50%',
+          depth: 50,
 				}
 			},
 
@@ -57,7 +66,6 @@ class Ho extends React.Component {
 
 			series: [{
 				type: 'pie',
-				innerSize: '100',
 				data: [
 					{
 						name: 'Over 24 hrs',

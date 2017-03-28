@@ -24,6 +24,10 @@ class Ho extends React.Component {
   pieChart() {
     return {
       chart: {
+        options3d: {
+          enabled: true,
+          alpha: 45
+        },
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false
@@ -65,6 +69,7 @@ class Ho extends React.Component {
 				type: 'pie',
 				name: 'Satisfaction',
 				innerSize: '50%',
+        depth: 45,
 				data: [
 					{ name: 'Offered', y: this.props.satisfactionHO.offered, color: '#ecae4f' },
 					{ name: 'Good', y: this.props.satisfactionHO.good, color: '#23b66f' },

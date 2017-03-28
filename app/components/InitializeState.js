@@ -1,4 +1,6 @@
 const InitializeState =  {
+  currentStep: 0,
+
   status_total: {
     new:
     {
@@ -30,7 +32,6 @@ const InitializeState =  {
   satisfaction_total: {
     ho:
     {
-      total: null,
       bad: null,
       good: null ,
       offered: null
@@ -38,7 +39,6 @@ const InitializeState =  {
 
     tmc:
     {
-      total: null,
       bad: null,
       good: null,
       offered: null
