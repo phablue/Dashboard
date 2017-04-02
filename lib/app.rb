@@ -13,13 +13,6 @@ end
 get '/zd_data' do
   client = ZendeskAPIClient.create_client
   zd_data = TicketManager.new(client).get_tickets
-  # write the results of zd_data to a file and then for testing just read from that file instead of pulling data every time
-  # File.open('./zd_data.json', 'w') { |file| file.write(zd_data)
 
   zd_data.to_json
-end
-
-def self.get_test_tickets
-  filez = File.read("./zd_data")
-  JSON.parse(filez)
 end

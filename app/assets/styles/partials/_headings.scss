@@ -32,22 +32,11 @@ h6, .h6 {
 
 .sub-title {
   color: $subtitle-color;
-  font-family: $lato;
+  font-family: $heebo;
   font-weight: 900;
   letter-spacing: 1px;
   line-height: 1.3;
   padding: 0 0.7rem;
 	text-shadow: 2px 2px 4px #53432c;
-}
-
-.light {
-  font-weight: $light;
-}
-
-.regular {
-  font-weight: $regular;
-}
-
-.semibold {
-  font-weight: $semibold;
+  text-transform: uppercase;
 }

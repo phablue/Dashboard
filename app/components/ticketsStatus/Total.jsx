@@ -35,7 +35,7 @@ class Total extends React.Component {
       },
 
       title: {
-        text: 'Total Status'
+        text: 'TOTAL'
       },
 
 			xAxis: {

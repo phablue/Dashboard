@@ -1,4 +1,13 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);@import url(https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700);@import url(https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Titillium+Web:200,200i,300,300i,400,400i,600,600i,700,700i,900);@import url(https://fonts.googleapis.com/css?family=Baloo);h1, h2, h3, h4, h5, h6,
+@import url(https://fonts.googleapis.com/css?family=Roboto);@import url(https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700);@import url(https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Titillium+Web:200,200i,300,300i,400,400i,600,600i,700,700i,900);@import url(https://fonts.googleapis.com/css?family=Baloo);@import url(https://fonts.googleapis.com/css?family=Heebo:400,500,700,800,900|Istok+Web:400,400i,700,700i|Work+Sans:400,500,600,700,800,900);.light {
+  font-weight: 300; }
+
+.regular {
+  font-weight: 400; }
+
+.semibold {
+  font-weight: 600; }
+
+h1, h2, h3, h4, h5, h6,
 .h1, .h2m .h3, .h4, .h5, .h6 {
   font-family: "Hind", sans-serif;
   font-weight: 600;
@@ -25,12 +34,83 @@ h6, .h6 {
 
 .sub-title {
   color: #eee;
-  font-family: "Lato", sans-serif;
+  font-family: "Heebo", sans-serif;
   font-weight: 900;
   letter-spacing: 1px;
   line-height: 1.3;
   padding: 0 0.7rem;
-  text-shadow: 2px 2px 4px #53432c; }
+  text-shadow: 2px 2px 4px #53432c;
+  text-transform: uppercase; }
+
+body {
+  margin: 0; }
+
+* {
+  box-sizing: border-box; }
+
+/*
+div {
+  vertical-align: top;
+}
+*/
+.row {
+  width: auto;
+  padding: 5px;
+  max-width: none; }
+
+.row:before {
+  display: table;
+  content: " "; }
+
+.row:after {
+  display: table;
+  content: " "; }
+
+.columns {
+  display: inline-block;
+  float: left;
+  padding: 0.1rem;
+  position: relative; }
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+.col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+  display: inline-block; }
+
+.col-1 {
+  width: 8.33%; }
+
+.col-2 {
+  width: 16.66%; }
+
+.col-3 {
+  width: 25%; }
+
+.col-4 {
+  width: 33.33%; }
+
+.col-5 {
+  width: 41.66%; }
+
+.col-6 {
+  width: 50%; }
+
+.col-7 {
+  width: 58.33%; }
+
+.col-8 {
+  width: 66.66%; }
+
+.col-9 {
+  width: 75%; }
+
+.col-10 {
+  width: 83.33%; }
+
+.col-11 {
+  width: 91.66%; }
+
+.col-12 {
+  width: 100%; }
 
 .light {
   font-weight: 300; }
@@ -40,6 +120,41 @@ h6, .h6 {
 
 .semibold {
   font-weight: 600; }
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2m .h3, .h4, .h5, .h6 {
+  font-family: "Hind", sans-serif;
+  font-weight: 600;
+  margin: 0.3rem 0;
+  text-transform: capitalize; }
+
+h1, .h1 {
+  font-size: 3rem; }
+
+h2, .h2 {
+  font-size: 2.5rem; }
+
+h3, .h3 {
+  font-size: 2.2rem; }
+
+h4, .h4 {
+  font-size: 1.75rem; }
+
+h5, .h5 {
+  font-size: 1.5rem; }
+
+h6, .h6 {
+  font-size: 1.25rem; }
+
+.sub-title {
+  color: #eee;
+  font-family: "Heebo", sans-serif;
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1.3;
+  padding: 0 0.7rem;
+  text-shadow: 2px 2px 4px #53432c;
+  text-transform: uppercase; }
 
 body {
   margin: 0; }
@@ -188,11 +303,11 @@ body {
   padding: 0.7rem; }
   .chart .highcharts-title {
     fill: #007aff !important;
-    font-family: "Hind", sans-serif;
-    font-size: 1.9rem !important;
+    font-family: "Istok Web", sans-serif;
+    font-size: 2rem !important;
     font-weight: 600;
     margin-top: 1.0rem;
-    text-shadow: 1px 1px 1px #1f2e45; }
+    text-shadow: 2px 2px 4px #1f2e45; }
   .chart .highcharts-axis-labels > text {
     font-size: 0.8rem !important;
     font-weight: 600; }
@@ -258,7 +373,7 @@ row > .curreent-date-time {
 .first-reply-time {
   height: 26.5rem; }
   .first-reply-time .group {
-    background-color: #1f2e45; }
+    background-color: #101823; }
   .first-reply-time .highcharts-container {
     height: 21.0rem !important; }
   .first-reply-time .highcharts-data-label > text {
@@ -312,7 +427,7 @@ row > .curreent-date-time {
     color: ghostwhite;
     text-shadow: 2px 2px 2px #007aff;
     font-family: "Hind", sans-serif;
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 600;
     list-style: none;
     text-transform: capitalize; }

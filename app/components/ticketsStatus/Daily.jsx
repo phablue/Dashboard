@@ -29,7 +29,7 @@ class Daily extends React.Component {
       },
 
       title: {
-        text: 'Daily Status'
+        text: 'DAILY'
       },
 
 			xAxis: {

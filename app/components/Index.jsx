@@ -28,7 +28,7 @@ class Index extends React.Component {
       .then((jsonData) => {
         this.setState(jsonData)
 				this.setState({ currentStep: 1 })
-				this.displayPage()
+        this.displayPage()
       })
       .catch((err) => {
         console.log('parsing failed', err)
@@ -50,7 +50,6 @@ class Index extends React.Component {
 	}
 
 	showPage() {
-		console.log(this.refs);
 		switch (this.state.currentStep) {
 			case 1:
 				return this.showAll()
