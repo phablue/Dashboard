@@ -13,6 +13,5 @@ end
 get '/zd_data' do
   client = ZendeskAPIClient.create_client
   zd_data = TicketManager.new(client).get_tickets
-
   zd_data.to_json
 end

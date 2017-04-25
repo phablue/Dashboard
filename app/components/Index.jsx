@@ -20,18 +20,26 @@ class Index extends React.Component {
     this.getData()
   }
 
+  handleErrors(response) {
+    if (!response.ok) {
+      throw Error(response.status);
+    }
+    return response.json();
+  }
+
   getData() {
     fetch('/zd_data')
-      .then((response) => {
-        return response.json()
-      })
+      .then(this.handleErrors)
       .then((jsonData) => {
         this.setState(jsonData)
 				this.setState({ currentStep: 1 })
         this.displayPage()
       })
       .catch((err) => {
-        console.log('parsing failed', err)
+        console.log(err)
+        if(err.message == 500) {
+          this.getData()
+        }
       })
   }
 
